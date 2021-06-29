@@ -30,10 +30,10 @@ public class ArticleService {
 	}
 
 	public void makeTestData() {
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 100; i++) {
 			String title = "제목 " + (i + 1);
 			String body = "내용 " + (i + 1);
-			write(1, 1, title, body);
+			write(i % 2 + 1, i % 2 + 1, title, body);
 		}
 	}
 }

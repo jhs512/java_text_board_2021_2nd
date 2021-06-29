@@ -114,40 +114,42 @@ public class UsrArticleController extends Controller {
 	private void actionList(Rq rq) {
 		List<Article> articles = articleService.getArticles();
 
-		System.out.printf("번호 / 작성날자 / 제목\n");
+		System.out.printf("번호 / 게시판 / 작성자 / 작성날자 / 제목\n");
 
 		for (int i = articles.size() - 1; i >= 0; i--) {
 			Article article = articles.get(i);
-			System.out.printf("%d / %s / %s\n", article.getId(), article.getRegDate(), article.getTitle());
+
+			System.out.printf("%d / %d / %d / %s / %s\n", article.getId(), article.getBoardId(), article.getMemberId(), article.getRegDate(),
+					article.getTitle());
 		}
 	}
 
 	private void actionWrite(Rq rq) {
 		int boardId = rq.getIntParam("boardId", 0);
-		
-		if ( boardId == 0 ) {
+
+		if (boardId == 0) {
 			System.out.println("boardId를 입력해주세요.");
 			return;
 		}
-		
+
 		Board board = boardService.getBoardById(boardId);
-		
-		if ( board == null ) {
+
+		if (board == null) {
 			System.out.println("존재하지 않는 게시판 번호 입니다.");
 			return;
 		}
-		
+
 		System.out.printf("== %s 게시판 글작성 ==\n", board.getName());
-		
+
 		System.out.printf("제목 : ");
 		String title = sc.nextLine().trim();
 		System.out.printf("내용 : ");
 		String body = sc.nextLine().trim();
-		
+
 		int loginedMemberId = rq.getLoginedMemberId();
 
 		int id = articleService.write(1, loginedMemberId, title, body);
-		
+
 		System.out.printf("%d번 게시물이 생성되었습니다.\n", id);
 	}
 
