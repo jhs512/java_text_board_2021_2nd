@@ -123,7 +123,7 @@ public class UsrArticleController extends Controller {
 		System.out.printf("내용 : ");
 		String body = sc.nextLine().trim();
 
-		int id = articleService.write(title, body);
+		int id = articleService.write(1, title, body);
 
 		System.out.printf("%d번 게시물이 생성되었습니다.\n", id);
 	}
