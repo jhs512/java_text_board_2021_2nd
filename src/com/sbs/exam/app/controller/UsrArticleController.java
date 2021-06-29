@@ -9,15 +9,18 @@ import com.sbs.exam.app.dto.Article;
 import com.sbs.exam.app.dto.Board;
 import com.sbs.exam.app.service.ArticleService;
 import com.sbs.exam.app.service.BoardService;
+import com.sbs.exam.app.service.MemberService;
 import com.sbs.exam.util.Util;
 
 public class UsrArticleController extends Controller {
 	private ArticleService articleService;
-	private Scanner sc;
 	private BoardService boardService;
+	private MemberService memberService;
+	private Scanner sc;
 
 	public UsrArticleController() {
 		boardService = Container.getBoardService();
+		memberService = Container.getMemberService();
 		articleService = Container.getArticleService();
 		sc = Container.getSc();
 
@@ -119,9 +122,20 @@ public class UsrArticleController extends Controller {
 		for (int i = articles.size() - 1; i >= 0; i--) {
 			Article article = articles.get(i);
 
-			System.out.printf("%d / %d / %d / %s / %s\n", article.getId(), article.getBoardId(), article.getMemberId(), article.getRegDate(),
+			String boardName = getBoardNameByBoardId(article.getBoardId());
+			String writerName = getWriterNameByMemberId(article.getMemberId());
+
+			System.out.printf("%d / %s / %s / %s / %s\n", article.getId(), boardName, writerName, article.getRegDate(),
 					article.getTitle());
 		}
+	}
+
+	private String getWriterNameByMemberId(int memberId) {
+		return memberService.getMemberById(memberId).getNickname();
+	}
+
+	private String getBoardNameByBoardId(int boardId) {
+		return boardService.getBoardById(boardId).getName();
 	}
 
 	private void actionWrite(Rq rq) {
