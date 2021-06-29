@@ -112,4 +112,8 @@ public class Rq {
 		setSessionAttr("loginedMember", member);
 	}
 
+	public int getLoginedMemberId() {
+		return getLoginedMember().getId();
+	}
+
 }
