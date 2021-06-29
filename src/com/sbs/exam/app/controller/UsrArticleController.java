@@ -26,6 +26,7 @@ public class UsrArticleController extends Controller {
 	}
 
 	private void makeTestData() {
+		boardService.makeTestData();
 		articleService.makeTestData();
 	}
 
