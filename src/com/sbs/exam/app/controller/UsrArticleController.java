@@ -115,18 +115,34 @@ public class UsrArticleController extends Controller {
 	}
 
 	private void actionList(Rq rq) {
-		List<Article> articles = articleService.getArticles();
+		int boardId = rq.getIntParam("boardId", 0);
+		Board board = null;
+
+		if (boardId != 0) {
+			board = boardService.getBoardById(boardId);
+		}
+
+		if (board == null && boardId > 0) {
+			System.out.println("해당 게시판 번호는 존재하지 않습니다.");
+			return;
+		}
+
+		List<Article> articles = articleService.getArticles(boardId);
+
+		String boardName = board == null ? "전체" : board.getName();
+
+		System.out.printf("== %s 게시물리스트 ==\n", boardName);
 
 		System.out.printf("번호 / 게시판 / 작성자 / 작성날자 / 제목\n");
 
 		for (int i = articles.size() - 1; i >= 0; i--) {
 			Article article = articles.get(i);
 
-			String boardName = getBoardNameByBoardId(article.getBoardId());
+			String articleBoardName = getBoardNameByBoardId(article.getBoardId());
 			String writerName = getWriterNameByMemberId(article.getMemberId());
 
-			System.out.printf("%d / %s / %s / %s / %s\n", article.getId(), boardName, writerName, article.getRegDate(),
-					article.getTitle());
+			System.out.printf("%d / %s / %s / %s / %s\n", article.getId(), articleBoardName, writerName,
+					article.getRegDate(), article.getTitle());
 		}
 	}
 

@@ -30,24 +30,36 @@ public class ArticleRepository {
 
 	public void deleteArticleById(int id) {
 		Article article = getArticleById(id);
-		
-		if ( article != null ) {
+
+		if (article != null) {
 			articles.remove(article);
 		}
 	}
 
 	public Article getArticleById(int id) {
-		for ( Article article : articles ) {
-			if ( article.getId() == id ) {
+		for (Article article : articles) {
+			if (article.getId() == id) {
 				return article;
 			}
 		}
-		
+
 		return null;
 	}
 
-	public List<Article> getArticles() {
-		return articles;
+	public List<Article> getArticles(int boardId) {
+		if (boardId == 0) {
+			return articles;
+		}
+
+		List<Article> filteredArticles = new ArrayList<>();
+
+		for (Article article : articles) {
+			if (article.getBoardId() == boardId) {
+				filteredArticles.add(article);
+			}
+		}
+		
+		return filteredArticles;
 	}
 
 }
