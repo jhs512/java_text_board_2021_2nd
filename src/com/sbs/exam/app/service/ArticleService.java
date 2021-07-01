@@ -54,19 +54,19 @@ public class ArticleService {
 		articleRepository.increaseHitCount(id);
 	}
 
-	public void increaseLikePoint(int id) {
-		articleRepository.increaseLikePoint(id);
+	public void increaseGoodlikePoint(int id) {
+		articleRepository.increaseGoodlikePoint(id);
 	}
 
-	public void decreaseLikePoint(int id) {
-		articleRepository.decreaseLikePoint(id);
+	public void decreaseGoodlikePoint(int id) {
+		articleRepository.decreaseGoodlikePoint(id);
 	}
 
 	public void increaseDislikePoint(int id) {
 		articleRepository.increaseDislikePoint(id);
 	}
 
-	public void drcreaseDislikePoint(int id) {
-		articleRepository.drcreaseDislikePoint(id);
+	public void decreaseDislikePoint(int id) {
+		articleRepository.decreaseDislikePoint(id);
 	}
 }

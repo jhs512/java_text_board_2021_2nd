@@ -16,6 +16,6 @@ public class Article {
 	private String title;
 	private String body;
 	private int hitCount;
-	private int likePoint;
+	private int goodlikePoint;
 	private int dislikePoint;
 }

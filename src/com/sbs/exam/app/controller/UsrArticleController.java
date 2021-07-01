@@ -113,7 +113,7 @@ public class UsrArticleController extends Controller {
 		System.out.printf("작성날짜 : %s\n", article.getRegDate());
 		System.out.printf("수정날짜 : %s\n", article.getUpdateDate());
 		System.out.printf("조회수 : %d\n", article.getHitCount());
-		System.out.printf("좋아요 : %d\n", article.getLikePoint());
+		System.out.printf("좋아요 : %d\n", article.getGoodlikePoint());
 		System.out.printf("싫어요 : %d\n", article.getDislikePoint());
 		System.out.printf("제목 : %s\n", article.getTitle());
 		System.out.printf("내용 : %s\n", article.getBody());
@@ -154,7 +154,7 @@ public class UsrArticleController extends Controller {
 			String writerName = getWriterNameByMemberId(article.getMemberId());
 
 			System.out.printf("%4d / %4s / %s / %s / %6d / %6d / %6d / %s\n", article.getId(), articleBoardName,
-					writerName, article.getRegDate(), article.getHitCount(), article.getLikePoint(),
+					writerName, article.getRegDate(), article.getHitCount(), article.getGoodlikePoint(),
 					article.getDislikePoint(), article.getTitle());
 		}
 	}

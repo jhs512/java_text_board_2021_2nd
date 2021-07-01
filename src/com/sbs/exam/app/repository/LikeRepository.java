@@ -15,7 +15,7 @@ public class LikeRepository {
 		lastId = 0;
 	}
 
-	public Like getItemByRelTypeCodeAndRelIdAndMemberId(String relTypeCode, int relId, int memberId) {
+	public Like getLikeByRelTypeCodeAndRelIdAndMemberId(String relTypeCode, int relId, int memberId) {
 		for (Like like : likes) {
 			if (!like.getRelTypeCode().equals(relTypeCode)) {
 				continue;
@@ -35,8 +35,8 @@ public class LikeRepository {
 		return null;
 	}
 
-	public int getSummaryLikePointByRelTypeCodeAndRelIdAndMemberId(String relTypeCode, int relId, int memberId) {
-		Like like = getItemByRelTypeCodeAndRelIdAndMemberId(relTypeCode, relId, memberId);
+	public int getLikePointByRelTypeCodeAndRelIdAndMemberId(String relTypeCode, int relId, int memberId) {
+		Like like = getLikeByRelTypeCodeAndRelIdAndMemberId(relTypeCode, relId, memberId);
 
 		if (like != null) {
 			return like.getPoint();
@@ -45,7 +45,7 @@ public class LikeRepository {
 		return 0;
 	}
 
-	public int like(String relTypeCode, int relId, int memberId) {
+	public int goodlike(String relTypeCode, int relId, int memberId) {
 		int id = lastId + 1;
 		String regDate = Util.getNowDateStr();
 		String updateDate = regDate;
@@ -71,8 +71,8 @@ public class LikeRepository {
 		return id;
 	}
 
-	public void removeItem(String relTypeCode, int relId, int memberId) {
-		Like like = getItemByRelTypeCodeAndRelIdAndMemberId(relTypeCode, relId, memberId);
+	public void deleteLike(String relTypeCode, int relId, int memberId) {
+		Like like = getLikeByRelTypeCodeAndRelIdAndMemberId(relTypeCode, relId, memberId);
 
 		if (like != null) {
 			likes.remove(like);
