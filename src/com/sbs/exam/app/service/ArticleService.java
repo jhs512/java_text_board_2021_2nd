@@ -25,11 +25,12 @@ public class ArticleService {
 		articleRepository.deleteArticleById(id);
 	}
 
-	public List<Article> getArticles(int boardId, String searchKeywordTypeCode, String searchKeyword, int page,
-			int pageItemsCount) {
+	public List<Article> getArticles(int boardId, String searchKeywordTypeCode, String searchKeyword,
+			String orderByColumn, String orderAscTypeCode, int page, int pageItemsCount) {
 		int limitStart = (page - 1) * pageItemsCount;
 		int limitCount = pageItemsCount;
-		return articleRepository.getArticles(boardId, searchKeywordTypeCode, searchKeyword, limitStart, limitCount);
+		return articleRepository.getArticles(boardId, searchKeywordTypeCode, searchKeyword, orderByColumn,
+				orderAscTypeCode, limitStart, limitCount);
 	}
 
 	public void makeTestData() {

@@ -80,12 +80,18 @@ public class ArticleRepository {
 		return true;
 	}
 
-	public List<Article> getArticles(int boardId, String searchKeywordTypeCode, String searchKeyword, int limitStart,
-			int limitCount) {
-		List<Article> sortedArticles = new ArrayList<>();
+	public List<Article> getArticles(int boardId, String searchKeywordTypeCode, String searchKeyword,
+			String orderByColumn, String orderAscTypeCode, int limitStart, int limitCount) {
+		List<Article> sortedArticles = null;
 
-		for (int i = articles.size() - 1; i >= 0; i--) {
-			sortedArticles.add(articles.get(i));
+		if (orderByColumn.equals("id") && orderAscTypeCode.equals("desc")) {
+			sortedArticles = new ArrayList<>();
+
+			for (int i = articles.size() - 1; i >= 0; i--) {
+				sortedArticles.add(articles.get(i));
+			}
+		} else if (orderByColumn.equals("id") && orderAscTypeCode.equals("asc")) {
+			sortedArticles = articles;
 		}
 
 		List<Article> filteredArticles = new ArrayList<>();

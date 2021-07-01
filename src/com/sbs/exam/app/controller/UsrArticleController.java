@@ -115,6 +115,9 @@ public class UsrArticleController extends Controller {
 	}
 
 	private void actionList(Rq rq) {
+		String orderByColumn = rq.getParam("orderByColumn", "id");
+		String orderAscTypeCode = rq.getParam("orderAscTypeCode", "desc");
+
 		int page = rq.getIntParam("page", 1);
 		int pageItemsCount = 10;
 		String searchKeyword = rq.getParam("searchKeyword", "");
@@ -132,8 +135,8 @@ public class UsrArticleController extends Controller {
 		}
 
 		int totalItemsCount = articleService.getTotalItemsCount(boardId, searchKeywordTypeCode, searchKeyword);
-		List<Article> articles = articleService.getArticles(boardId, searchKeywordTypeCode, searchKeyword, page,
-				pageItemsCount);
+		List<Article> articles = articleService.getArticles(boardId, searchKeywordTypeCode, searchKeyword,
+				orderByColumn, orderAscTypeCode, page, pageItemsCount);
 
 		String boardName = board == null ? "전체" : board.getName();
 
