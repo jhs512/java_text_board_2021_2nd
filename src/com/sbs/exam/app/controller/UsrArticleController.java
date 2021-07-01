@@ -115,6 +115,8 @@ public class UsrArticleController extends Controller {
 	}
 
 	private void actionList(Rq rq) {
+		String searchKeyword = rq.getParam("searchKeyword", "");
+		String searchKeywordTypeCode = rq.getParam("searchKeywordTypeCode", "");
 		int boardId = rq.getIntParam("boardId", 0);
 		Board board = null;
 
@@ -127,7 +129,7 @@ public class UsrArticleController extends Controller {
 			return;
 		}
 
-		List<Article> articles = articleService.getArticles(boardId);
+		List<Article> articles = articleService.getArticles(boardId, searchKeywordTypeCode, searchKeyword);
 
 		String boardName = board == null ? "전체" : board.getName();
 

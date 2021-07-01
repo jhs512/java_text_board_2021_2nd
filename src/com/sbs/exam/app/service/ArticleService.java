@@ -25,8 +25,8 @@ public class ArticleService {
 		articleRepository.deleteArticleById(id);
 	}
 
-	public List<Article> getArticles(int boardId) {
-		return articleRepository.getArticles(boardId);
+	public List<Article> getArticles(int boardId, String searchKeywordTypeCode, String searchKeyword) {
+		return articleRepository.getArticles(boardId, searchKeywordTypeCode, searchKeyword);
 	}
 
 	public void makeTestData() {

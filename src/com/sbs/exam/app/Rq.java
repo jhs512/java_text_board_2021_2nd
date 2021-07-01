@@ -72,6 +72,18 @@ public class Rq {
 		}
 	}
 
+	public String getParam(String paramName, String defaultValue) {
+		if (params.containsKey(paramName) == false) {
+			return defaultValue;
+		}
+
+		try {
+			return params.get(paramName);
+		} catch (NumberFormatException e) {
+			return defaultValue;
+		}
+	}
+
 	private void setSessionAttr(String key, Object value) {
 		Session session = Container.getSession();
 
@@ -115,5 +127,4 @@ public class Rq {
 	public int getLoginedMemberId() {
 		return getLoginedMember().getId();
 	}
-
 }
