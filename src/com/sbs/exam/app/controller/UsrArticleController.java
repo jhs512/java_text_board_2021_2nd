@@ -18,7 +18,7 @@ public class UsrArticleController extends Controller {
 	private MemberService memberService;
 	private Scanner sc;
 
-	public UsrArticleController() {
+	public void init() {
 		boardService = Container.getBoardService();
 		memberService = Container.getMemberService();
 		articleService = Container.getArticleService();

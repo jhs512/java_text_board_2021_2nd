@@ -3,6 +3,10 @@ package com.sbs.exam.app.interceptor;
 import com.sbs.exam.app.Rq;
 
 public class NeedLoginInterceptor implements Interceptor {
+	public void init() {
+		
+	}
+	
 	@Override
 	public boolean run(Rq rq) {
 		if (rq.isLogined()) {

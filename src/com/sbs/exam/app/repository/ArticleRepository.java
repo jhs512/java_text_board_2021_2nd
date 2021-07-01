@@ -13,7 +13,7 @@ public class ArticleRepository {
 	private List<Article> articles;
 	private int lastId;
 
-	public ArticleRepository() {
+	public void init() {
 		articles = new ArrayList<>();
 		lastId = 0;
 	}

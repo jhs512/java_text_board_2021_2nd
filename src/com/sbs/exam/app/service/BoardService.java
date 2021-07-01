@@ -8,7 +8,7 @@ public class BoardService {
 
 	private BoardRepository boardRepository;
 	
-	public BoardService() {
+	public void init() {
 		boardRepository = Container.getBoardRepository();
 	}
 

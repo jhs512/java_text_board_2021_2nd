@@ -3,6 +3,10 @@ package com.sbs.exam.app.controller;
 import com.sbs.exam.app.Rq;
 
 public class UsrSystemController extends Controller {
+	public void init() {
+		
+	}
+	
 	@Override
 	public void performAction(Rq rq) {
 		if (rq.getActionPath().equals("/usr/system/exit")) {

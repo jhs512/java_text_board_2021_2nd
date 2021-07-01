@@ -8,6 +8,7 @@ import com.sbs.exam.app.controller.UsrLikeController;
 import com.sbs.exam.app.controller.UsrMemberController;
 import com.sbs.exam.app.controller.UsrSystemController;
 import com.sbs.exam.app.interceptor.NeedLoginInterceptor;
+import com.sbs.exam.app.interceptor.NeedLogoutInterceptor;
 import com.sbs.exam.app.repository.ArticleRepository;
 import com.sbs.exam.app.repository.BoardRepository;
 import com.sbs.exam.app.repository.LikeRepository;
@@ -46,7 +47,7 @@ public class Container {
 	@Getter
 	private static NeedLoginInterceptor needLoginInterceptor;
 	@Getter
-	private static NeedLoginInterceptor needLogoutInterceptor;
+	private static NeedLogoutInterceptor needLogoutInterceptor;
 
 	@Getter
 	private static UsrSystemController usrSystemController;
@@ -63,20 +64,39 @@ public class Container {
 
 		memberRepository = new MemberRepository();
 		boardRepository = new BoardRepository();
-		articleRepository = new ArticleRepository();
 		likeRepository = new LikeRepository();
+		articleRepository = new ArticleRepository();
 
 		memberService = new MemberService();
 		boardService = new BoardService();
-		articleService = new ArticleService();
 		likeService = new LikeService();
+		articleService = new ArticleService();
 
 		needLoginInterceptor = new NeedLoginInterceptor();
-		needLogoutInterceptor = new NeedLoginInterceptor();
+		needLogoutInterceptor = new NeedLogoutInterceptor();
 
 		usrSystemController = new UsrSystemController();
 		usrMemberController = new UsrMemberController();
-		usrArticleController = new UsrArticleController();
 		usrLikeController = new UsrLikeController();
+		usrArticleController = new UsrArticleController();
+
+		// 초기화
+		memberRepository.init();
+		boardRepository.init();
+		likeRepository.init();
+		articleRepository.init();
+
+		memberService.init();
+		boardService.init();
+		likeService.init();
+		articleService.init();
+
+		needLoginInterceptor.init();
+		needLogoutInterceptor.init();
+
+		usrSystemController.init();
+		usrMemberController.init();
+		usrLikeController.init();
+		usrArticleController.init();
 	}
 }

@@ -1,5 +1,7 @@
 package com.sbs.exam.app.service;
 
+import java.util.List;
+
 import com.sbs.exam.app.container.Container;
 import com.sbs.exam.app.dto.Member;
 import com.sbs.exam.app.repository.MemberRepository;
@@ -8,7 +10,7 @@ public class MemberService {
 
 	private MemberRepository memberRepository;
 
-	public MemberService() {
+	public void init() {
 		memberRepository = Container.getMemberRepository();
 	}
 
@@ -33,6 +35,10 @@ public class MemberService {
 
 	public Member getMemberById(int id) {
 		return memberRepository.getMemberById(id);
+	}
+
+	public List<Member> getMembers() {
+		return memberRepository.getMembers();
 	}
 
 }

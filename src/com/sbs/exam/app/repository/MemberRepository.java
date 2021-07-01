@@ -7,11 +7,11 @@ import com.sbs.exam.app.dto.Member;
 import com.sbs.exam.util.Util;
 
 public class MemberRepository {
-	
+
 	private List<Member> members;
 	private int lastId;
 
-	public MemberRepository() {
+	public void init() {
 		members = new ArrayList<>();
 		lastId = 0;
 	}
@@ -30,23 +30,26 @@ public class MemberRepository {
 	}
 
 	public Member getMemberByLoginId(String loginId) {
-		for ( Member member : members ) {
-			if ( member.getLoginId().equals(loginId) ) {
+		for (Member member : members) {
+			if (member.getLoginId().equals(loginId)) {
 				return member;
 			}
 		}
-		
+
 		return null;
 	}
 
 	public Member getMemberById(int id) {
-		for ( Member member : members ) {
-			if ( member.getId() == id ) {
+		for (Member member : members) {
+			if (member.getId() == id) {
 				return member;
 			}
 		}
-		
+
 		return null;
 	}
 
+	public List<Member> getMembers() {
+		return members;
+	}
 }

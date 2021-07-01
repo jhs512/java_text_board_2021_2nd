@@ -10,7 +10,7 @@ public class LikeRepository {
 	private List<Like> likes;
 	private int lastId;
 
-	public LikeRepository() {
+	public void init() {
 		likes = new ArrayList<>();
 		lastId = 0;
 	}

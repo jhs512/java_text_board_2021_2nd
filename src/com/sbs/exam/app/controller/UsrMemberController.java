@@ -11,7 +11,7 @@ public class UsrMemberController extends Controller {
 	private Scanner sc;
 	private MemberService memberService;
 
-	public UsrMemberController() {
+	public void init() {
 		sc = Container.getSc();
 		memberService = Container.getMemberService();
 

@@ -3,6 +3,9 @@ package com.sbs.exam.app.interceptor;
 import com.sbs.exam.app.Rq;
 
 public class NeedLogoutInterceptor implements Interceptor {
+	public void init() {
+		
+	}
 
 	@Override
 	public boolean run(Rq rq) {
