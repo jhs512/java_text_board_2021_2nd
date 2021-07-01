@@ -46,14 +46,19 @@ public class ArticleRepository {
 		return null;
 	}
 
-	public List<Article> getArticles(int boardId, String searchKeywordTypeCode, String searchKeyword) {
-		if (boardId == 0 && searchKeyword.length() == 0) {
-			return articles;
+	public List<Article> getArticles(int boardId, String searchKeywordTypeCode, String searchKeyword, int limitStart,
+			int limitCount) {
+		List<Article> sortedArticles = new ArrayList<>();
+
+		for (int i = articles.size() - 1; i >= 0; i--) {
+			sortedArticles.add(articles.get(i));
 		}
 
 		List<Article> filteredArticles = new ArrayList<>();
 
-		for (Article article : articles) {
+		int dataIndex = 0;
+
+		for (Article article : sortedArticles) {
 			if (boardId != 0) {
 				if (article.getBoardId() != boardId) {
 					continue;
@@ -81,7 +86,15 @@ public class ArticleRepository {
 				}
 			}
 
-			filteredArticles.add(article);
+			if (dataIndex >= limitStart) {
+				filteredArticles.add(article);
+			}
+
+			dataIndex++;
+
+			if (filteredArticles.size() == limitCount) {
+				break;
+			}
 		}
 
 		return filteredArticles;

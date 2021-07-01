@@ -115,6 +115,8 @@ public class UsrArticleController extends Controller {
 	}
 
 	private void actionList(Rq rq) {
+		int page = rq.getIntParam("page", 1);
+		int pageItemsCount = 10;
 		String searchKeyword = rq.getParam("searchKeyword", "");
 		String searchKeywordTypeCode = rq.getParam("searchKeywordTypeCode", "");
 		int boardId = rq.getIntParam("boardId", 0);
@@ -129,7 +131,8 @@ public class UsrArticleController extends Controller {
 			return;
 		}
 
-		List<Article> articles = articleService.getArticles(boardId, searchKeywordTypeCode, searchKeyword);
+		List<Article> articles = articleService.getArticles(boardId, searchKeywordTypeCode, searchKeyword, page,
+				pageItemsCount);
 
 		String boardName = board == null ? "전체" : board.getName();
 
@@ -137,9 +140,7 @@ public class UsrArticleController extends Controller {
 
 		System.out.printf("번호 / 게시판 / 작성자 / 작성날자 / 제목\n");
 
-		for (int i = articles.size() - 1; i >= 0; i--) {
-			Article article = articles.get(i);
-
+		for (Article article : articles) {
 			String articleBoardName = getBoardNameByBoardId(article.getBoardId());
 			String writerName = getWriterNameByMemberId(article.getMemberId());
 
