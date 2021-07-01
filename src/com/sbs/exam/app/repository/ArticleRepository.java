@@ -20,7 +20,7 @@ public class ArticleRepository {
 		String regDate = Util.getNowDateStr();
 		String updateDate = regDate;
 
-		Article article = new Article(id, regDate, updateDate, boardId, memberId, title, body);
+		Article article = new Article(id, regDate, updateDate, boardId, memberId, title, body, 0);
 		articles.add(article);
 
 		lastId = id;

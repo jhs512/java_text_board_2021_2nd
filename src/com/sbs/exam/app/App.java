@@ -53,7 +53,9 @@ public class App {
 			}
 
 			Controller controller = getControllerByRequestUri(rq);
-			controller.performAction(rq);
+			if (controller != null) {
+				controller.performAction(rq);
+			}
 
 			if (rq.getActionPath().equals("/usr/system/exit")) {
 				break;

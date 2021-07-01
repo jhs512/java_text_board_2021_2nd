@@ -142,13 +142,13 @@ public class UsrArticleController extends Controller {
 
 		System.out.printf("== %s 게시물리스트(%d건) ==\n", boardName, totalItemsCount);
 
-		System.out.printf("번호 / 게시판 / 작성자 / 작성날자 / 제목\n");
+		System.out.printf("번호 / 게시판   / 작성자  / 작성날자            / 제목\n");
 
 		for (Article article : articles) {
 			String articleBoardName = getBoardNameByBoardId(article.getBoardId());
 			String writerName = getWriterNameByMemberId(article.getMemberId());
 
-			System.out.printf("%d / %s / %s / %s / %s\n", article.getId(), articleBoardName, writerName,
+			System.out.printf("%4d / %4s / %s / %s / %s\n", article.getId(), articleBoardName, writerName,
 					article.getRegDate(), article.getTitle());
 		}
 	}
