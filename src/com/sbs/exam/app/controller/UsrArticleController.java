@@ -147,7 +147,7 @@ public class UsrArticleController extends Controller {
 
 		System.out.printf("== %s 게시물리스트(%d건) ==\n", boardName, totalItemsCount);
 
-		System.out.printf("번호 / 게시판   / 작성자  / 작성날자            / 조회수 / 좋아요 / 싫어요 / 제목\n");
+		System.out.printf("번호 / 게시판   / 작성자    / 작성날자            / 조회수 / 좋아요 / 싫어요 / 제목\n");
 
 		for (Article article : articles) {
 			String articleBoardName = getBoardNameByBoardId(article.getBoardId());

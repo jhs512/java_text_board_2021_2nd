@@ -13,11 +13,11 @@ public class MemberService {
 	}
 
 	public void makeTestData() {
-		for (int i = 0; i < 2; i++) {
-			String loginId = "user" + (i + 1);
+		for (int i = 0; i < 100; i++) {
+			String loginId = "user" + String.format("%03d", i + 1);
 			String loginPw = loginId;
-			String name = "홍길동" + (i + 1);
-			String nickname = "강바랑" + (i + 1);
+			String name = "홍길동" + String.format("%03d", i + 1);
+			String nickname = "강바람" + String.format("%03d", i + 1);
 
 			join(loginId, loginPw, name, nickname);
 		}
