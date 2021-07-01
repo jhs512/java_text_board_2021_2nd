@@ -2,7 +2,9 @@ package com.sbs.exam.app.repository;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.sbs.exam.app.dto.Article;
 import com.sbs.exam.util.Util;
@@ -114,10 +116,17 @@ public class ArticleRepository {
 			return articles;
 		}
 
-		List<Article> sortedArticles = new ArrayList<Article>(articles);
+		List<Article> sortedArticles = articles;
 
 		if (orderByColumn.equals("id") && orderAscTypeCode.equals("desc")) {
+			sortedArticles = new ArrayList<Article>(articles);
 			Collections.reverse(sortedArticles);
+		} else if (orderByColumn.equals("hitCount") && orderAscTypeCode.equals("asc")) {
+			return sortedArticles.stream().sorted(Comparator.comparing(Article::getHitCount))
+					.collect(Collectors.toList());
+		} else if (orderByColumn.equals("hitCount") && orderAscTypeCode.equals("desc")) {
+			return sortedArticles.stream().sorted(Comparator.comparing(Article::getHitCount).reversed())
+					.collect(Collectors.toList());
 		}
 
 		return sortedArticles;
