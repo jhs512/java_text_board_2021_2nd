@@ -1,6 +1,7 @@
 package com.sbs.exam.app.repository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.sbs.exam.app.dto.Article;
@@ -82,17 +83,7 @@ public class ArticleRepository {
 
 	public List<Article> getArticles(int boardId, String searchKeywordTypeCode, String searchKeyword,
 			String orderByColumn, String orderAscTypeCode, int limitStart, int limitCount) {
-		List<Article> sortedArticles = null;
-
-		if (orderByColumn.equals("id") && orderAscTypeCode.equals("desc")) {
-			sortedArticles = new ArrayList<>();
-
-			for (int i = articles.size() - 1; i >= 0; i--) {
-				sortedArticles.add(articles.get(i));
-			}
-		} else if (orderByColumn.equals("id") && orderAscTypeCode.equals("asc")) {
-			sortedArticles = articles;
-		}
+		List<Article> sortedArticles = getSortedArticles(orderByColumn, orderAscTypeCode);
 
 		List<Article> filteredArticles = new ArrayList<>();
 
@@ -116,6 +107,20 @@ public class ArticleRepository {
 		}
 
 		return filteredArticles;
+	}
+
+	private List<Article> getSortedArticles(String orderByColumn, String orderAscTypeCode) {
+		if (orderByColumn.equals("id") && orderAscTypeCode.equals("asc")) {
+			return articles;
+		}
+
+		List<Article> sortedArticles = new ArrayList<Article>(articles);
+
+		if (orderByColumn.equals("id") && orderAscTypeCode.equals("desc")) {
+			Collections.reverse(sortedArticles);
+		}
+
+		return sortedArticles;
 	}
 
 	public int getTotalItemsCount(int boardId, String searchKeywordTypeCode, String searchKeyword) {

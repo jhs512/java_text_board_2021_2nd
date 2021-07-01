@@ -76,12 +76,12 @@ public class Rq {
 		if (params.containsKey(paramName) == false) {
 			return defaultValue;
 		}
-
-		try {
-			return params.get(paramName);
-		} catch (NumberFormatException e) {
+		
+		if ( params.get(paramName).trim().length() == 0 ) {
 			return defaultValue;
 		}
+
+		return params.get(paramName).trim();
 	}
 
 	private void setSessionAttr(String key, Object value) {
