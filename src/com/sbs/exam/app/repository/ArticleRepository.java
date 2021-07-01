@@ -132,4 +132,8 @@ public class ArticleRepository {
 		return totalItemsCount;
 	}
 
+	public void increaseHitCount(int id) {
+		getArticleById(id).setHitCount(getArticleById(id).getHitCount() + 1);
+	}
+
 }

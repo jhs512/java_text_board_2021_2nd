@@ -107,9 +107,12 @@ public class UsrArticleController extends Controller {
 			return;
 		}
 
+		articleService.increaseHitCount(article.getId());
+
 		System.out.printf("번호 : %d\n", article.getId());
 		System.out.printf("작성날짜 : %s\n", article.getRegDate());
 		System.out.printf("수정날짜 : %s\n", article.getUpdateDate());
+		System.out.printf("조회수 : %d\n", article.getHitCount());
 		System.out.printf("제목 : %s\n", article.getTitle());
 		System.out.printf("내용 : %s\n", article.getBody());
 	}
@@ -142,14 +145,14 @@ public class UsrArticleController extends Controller {
 
 		System.out.printf("== %s 게시물리스트(%d건) ==\n", boardName, totalItemsCount);
 
-		System.out.printf("번호 / 게시판   / 작성자  / 작성날자            / 제목\n");
+		System.out.printf("번호 / 게시판   / 작성자  / 작성날자            / 조회수 / 제목\n");
 
 		for (Article article : articles) {
 			String articleBoardName = getBoardNameByBoardId(article.getBoardId());
 			String writerName = getWriterNameByMemberId(article.getMemberId());
 
-			System.out.printf("%4d / %4s / %s / %s / %s\n", article.getId(), articleBoardName, writerName,
-					article.getRegDate(), article.getTitle());
+			System.out.printf("%4d / %4s / %s / %s / %6d / %s\n", article.getId(), articleBoardName, writerName,
+					article.getRegDate(), article.getHitCount(), article.getTitle());
 		}
 	}
 
