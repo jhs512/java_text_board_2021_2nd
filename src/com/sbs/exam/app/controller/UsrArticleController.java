@@ -133,7 +133,7 @@ public class UsrArticleController extends Controller {
 
 		String boardName = board == null ? "전체" : board.getName();
 
-		System.out.printf("== %s 게시물리스트 ==\n", boardName);
+		System.out.printf("== %s 게시물리스트(%d건) ==\n", boardName, articles.size());
 
 		System.out.printf("번호 / 게시판 / 작성자 / 작성날자 / 제목\n");
 
