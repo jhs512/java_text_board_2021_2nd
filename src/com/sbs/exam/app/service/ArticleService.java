@@ -25,7 +25,8 @@ public class ArticleService {
 		articleRepository.deleteArticleById(id);
 	}
 
-	public List<Article> getArticles(int boardId, String searchKeywordTypeCode, String searchKeyword, int page, int pageItemsCount) {
+	public List<Article> getArticles(int boardId, String searchKeywordTypeCode, String searchKeyword, int page,
+			int pageItemsCount) {
 		int limitStart = (page - 1) * pageItemsCount;
 		int limitCount = pageItemsCount;
 		return articleRepository.getArticles(boardId, searchKeywordTypeCode, searchKeyword, limitStart, limitCount);
@@ -37,5 +38,9 @@ public class ArticleService {
 			String body = "내용 " + (i + 1);
 			write(i % 2 + 1, i % 2 + 1, title, body);
 		}
+	}
+
+	public int getTotalItemsCount(int boardId, String searchKeywordTypeCode, String searchKeyword) {
+		return articleRepository.getTotalItemsCount(boardId, searchKeywordTypeCode, searchKeyword);
 	}
 }

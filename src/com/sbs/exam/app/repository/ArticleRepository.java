@@ -46,6 +46,40 @@ public class ArticleRepository {
 		return null;
 	}
 
+	// 검색조건에 게시물이 부합하는지 알려준다.
+	private boolean searchOptionsMatched(Article article, int boardId, String searchKeywordTypeCode,
+			String searchKeyword) {
+
+		if (boardId != 0) {
+			if (article.getBoardId() != boardId) {
+				return false;
+			}
+		}
+
+		if (searchKeyword.length() > 0) {
+			switch (searchKeywordTypeCode) {
+			case "body":
+				if (!article.getBody().contains(searchKeyword)) {
+					return false;
+				}
+				break;
+			case "title,body":
+				if (!article.getTitle().contains(searchKeyword) && !article.getBody().contains(searchKeyword)) {
+					return false;
+				}
+				break;
+			case "title":
+			default:
+				if (!article.getTitle().contains(searchKeyword)) {
+					return false;
+				}
+				break;
+			}
+		}
+
+		return true;
+	}
+
 	public List<Article> getArticles(int boardId, String searchKeywordTypeCode, String searchKeyword, int limitStart,
 			int limitCount) {
 		List<Article> sortedArticles = new ArrayList<>();
@@ -59,31 +93,9 @@ public class ArticleRepository {
 		int dataIndex = 0;
 
 		for (Article article : sortedArticles) {
-			if (boardId != 0) {
-				if (article.getBoardId() != boardId) {
-					continue;
-				}
-			}
 
-			if (searchKeyword.length() > 0) {
-				switch (searchKeywordTypeCode) {
-				case "body":
-					if (!article.getBody().contains(searchKeyword)) {
-						continue;
-					}
-					break;
-				case "title,body":
-					if (!article.getTitle().contains(searchKeyword) && !article.getBody().contains(searchKeyword)) {
-						continue;
-					}
-					break;
-				case "title":
-					if (!article.getTitle().contains(searchKeyword)) {
-						continue;
-					}
-				default:
-					break;
-				}
+			if (searchOptionsMatched(article, boardId, searchKeywordTypeCode, searchKeyword) == false) {
+				continue;
 			}
 
 			if (dataIndex >= limitStart) {
@@ -98,6 +110,20 @@ public class ArticleRepository {
 		}
 
 		return filteredArticles;
+	}
+
+	public int getTotalItemsCount(int boardId, String searchKeywordTypeCode, String searchKeyword) {
+		int totalItemsCount = 0;
+
+		for (Article article : articles) {
+			if (searchOptionsMatched(article, boardId, searchKeywordTypeCode, searchKeyword) == false) {
+				continue;
+			}
+
+			totalItemsCount++;
+		}
+
+		return totalItemsCount;
 	}
 
 }
