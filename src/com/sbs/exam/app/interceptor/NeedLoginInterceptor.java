@@ -10,6 +10,10 @@ public class NeedLoginInterceptor implements Interceptor {
 		}
 
 		switch (rq.getActionPath()) {
+		case "/usr/like/like":
+		case "/usr/like/cancelLike":
+		case "/usr/like/dislike":
+		case "/usr/like/cancelDislike":
 		case "/usr/article/write":
 		case "/usr/article/modify":
 		case "/usr/article/delete":

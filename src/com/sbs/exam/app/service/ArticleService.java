@@ -53,4 +53,20 @@ public class ArticleService {
 	public void increaseHitCount(int id) {
 		articleRepository.increaseHitCount(id);
 	}
+
+	public void increaseLikePoint(int id) {
+		articleRepository.increaseLikePoint(id);
+	}
+
+	public void decreaseLikePoint(int id) {
+		articleRepository.decreaseLikePoint(id);
+	}
+
+	public void increaseDislikePoint(int id) {
+		articleRepository.increaseDislikePoint(id);
+	}
+
+	public void drcreaseDislikePoint(int id) {
+		articleRepository.drcreaseDislikePoint(id);
+	}
 }
