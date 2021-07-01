@@ -11,4 +11,10 @@ public class Util {
 		return dateStr;
 	}
 
+	public static int getRandomInt(int start, int end) {
+		int size = end - start + 1;
+
+		return start + (int) (Math.random() * size);
+	}
+
 }
