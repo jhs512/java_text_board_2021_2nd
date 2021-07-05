@@ -4,10 +4,11 @@ import java.util.Scanner;
 
 import com.sbs.exam.app.Rq;
 import com.sbs.exam.app.container.Container;
+import com.sbs.exam.app.container.ContainerComponent;
 import com.sbs.exam.app.dto.Member;
 import com.sbs.exam.app.service.MemberService;
 
-public class UsrMemberController extends Controller {
+public class UsrMemberController extends Controller implements ContainerComponent {
 	private Scanner sc;
 	private MemberService memberService;
 

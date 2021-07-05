@@ -3,10 +3,11 @@ package com.sbs.exam.app.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sbs.exam.app.container.ContainerComponent;
 import com.sbs.exam.app.dto.Board;
 import com.sbs.exam.util.Util;
 
-public class BoardRepository {
+public class BoardRepository implements ContainerComponent {
 	private List<Board> boards;
 	private int lastId;
 

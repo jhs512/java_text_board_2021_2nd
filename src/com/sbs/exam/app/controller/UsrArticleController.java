@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.sbs.exam.app.Rq;
 import com.sbs.exam.app.container.Container;
+import com.sbs.exam.app.container.ContainerComponent;
 import com.sbs.exam.app.dto.Article;
 import com.sbs.exam.app.dto.Board;
 import com.sbs.exam.app.service.ArticleService;
@@ -12,7 +13,7 @@ import com.sbs.exam.app.service.BoardService;
 import com.sbs.exam.app.service.MemberService;
 import com.sbs.exam.util.Util;
 
-public class UsrArticleController extends Controller {
+public class UsrArticleController extends Controller implements ContainerComponent {
 	private ArticleService articleService;
 	private BoardService boardService;
 	private MemberService memberService;

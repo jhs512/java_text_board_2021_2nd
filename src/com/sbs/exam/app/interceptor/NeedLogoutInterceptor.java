@@ -1,8 +1,9 @@
 package com.sbs.exam.app.interceptor;
 
 import com.sbs.exam.app.Rq;
+import com.sbs.exam.app.container.ContainerComponent;
 
-public class NeedLogoutInterceptor implements Interceptor {
+public class NeedLogoutInterceptor implements Interceptor, ContainerComponent {
 	public void init() {
 		
 	}

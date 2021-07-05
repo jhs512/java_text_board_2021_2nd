@@ -1,5 +1,7 @@
 package com.sbs.exam.app.container;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import com.sbs.exam.app.Session;
@@ -21,6 +23,8 @@ import com.sbs.exam.app.service.MemberService;
 import lombok.Getter;
 
 public class Container {
+	private static List<ContainerComponent> containerComponents;
+
 	@Getter
 	private static Scanner sc;
 	@Getter
@@ -61,42 +65,35 @@ public class Container {
 	static {
 		sc = new Scanner(System.in);
 		session = new Session();
+		containerComponents = new ArrayList<>();
 
-		memberRepository = new MemberRepository();
-		boardRepository = new BoardRepository();
-		likeRepository = new LikeRepository();
-		articleRepository = new ArticleRepository();
+		memberRepository = addContainerComponent(new MemberRepository());
+		boardRepository = addContainerComponent(new BoardRepository());
+		likeRepository = addContainerComponent(new LikeRepository());
+		articleRepository = addContainerComponent(new ArticleRepository());
 
-		memberService = new MemberService();
-		boardService = new BoardService();
-		likeService = new LikeService();
-		articleService = new ArticleService();
+		memberService = addContainerComponent(new MemberService());
+		boardService = addContainerComponent(new BoardService());
+		likeService = addContainerComponent(new LikeService());
+		articleService = addContainerComponent(new ArticleService());
 
-		needLoginInterceptor = new NeedLoginInterceptor();
-		needLogoutInterceptor = new NeedLogoutInterceptor();
+		needLoginInterceptor = addContainerComponent(new NeedLoginInterceptor());
+		needLogoutInterceptor = addContainerComponent(new NeedLogoutInterceptor());
 
-		usrSystemController = new UsrSystemController();
-		usrMemberController = new UsrMemberController();
-		usrLikeController = new UsrLikeController();
-		usrArticleController = new UsrArticleController();
+		usrSystemController = addContainerComponent(new UsrSystemController());
+		usrMemberController = addContainerComponent(new UsrMemberController());
+		usrLikeController = addContainerComponent(new UsrLikeController());
+		usrArticleController = addContainerComponent(new UsrArticleController());
 
 		// 초기화
-		memberRepository.init();
-		boardRepository.init();
-		likeRepository.init();
-		articleRepository.init();
+		for (ContainerComponent containerComponent : containerComponents) {
+			containerComponent.init();
+		}
+	}
 
-		memberService.init();
-		boardService.init();
-		likeService.init();
-		articleService.init();
+	private static <T> T addContainerComponent(ContainerComponent containerComponent) {
+		containerComponents.add(containerComponent);
 
-		needLoginInterceptor.init();
-		needLogoutInterceptor.init();
-
-		usrSystemController.init();
-		usrMemberController.init();
-		usrLikeController.init();
-		usrArticleController.init();
+		return (T) containerComponent;
 	}
 }

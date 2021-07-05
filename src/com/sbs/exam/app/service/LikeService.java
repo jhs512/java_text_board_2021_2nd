@@ -3,10 +3,11 @@ package com.sbs.exam.app.service;
 import java.util.Map;
 
 import com.sbs.exam.app.container.Container;
+import com.sbs.exam.app.container.ContainerComponent;
 import com.sbs.exam.app.dto.Article;
 import com.sbs.exam.app.repository.LikeRepository;
 
-public class LikeService {
+public class LikeService implements ContainerComponent {
 
 	private LikeRepository likeRepository;
 	private ArticleService articleService;

@@ -1,10 +1,11 @@
 package com.sbs.exam.app.service;
 
 import com.sbs.exam.app.container.Container;
+import com.sbs.exam.app.container.ContainerComponent;
 import com.sbs.exam.app.dto.Board;
 import com.sbs.exam.app.repository.BoardRepository;
 
-public class BoardService {
+public class BoardService implements ContainerComponent {
 
 	private BoardRepository boardRepository;
 	

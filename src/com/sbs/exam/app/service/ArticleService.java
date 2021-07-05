@@ -3,12 +3,13 @@ package com.sbs.exam.app.service;
 import java.util.List;
 
 import com.sbs.exam.app.container.Container;
+import com.sbs.exam.app.container.ContainerComponent;
 import com.sbs.exam.app.dto.Article;
 import com.sbs.exam.app.dto.Member;
 import com.sbs.exam.app.repository.ArticleRepository;
 import com.sbs.exam.util.Util;
 
-public class ArticleService {
+public class ArticleService implements ContainerComponent {
 	private ArticleRepository articleRepository;
 	private MemberService memberService;
 	private LikeService likeService;

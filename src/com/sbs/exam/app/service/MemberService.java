@@ -3,10 +3,11 @@ package com.sbs.exam.app.service;
 import java.util.List;
 
 import com.sbs.exam.app.container.Container;
+import com.sbs.exam.app.container.ContainerComponent;
 import com.sbs.exam.app.dto.Member;
 import com.sbs.exam.app.repository.MemberRepository;
 
-public class MemberService {
+public class MemberService implements ContainerComponent {
 
 	private MemberRepository memberRepository;
 

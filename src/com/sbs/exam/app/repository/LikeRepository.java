@@ -3,10 +3,11 @@ package com.sbs.exam.app.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sbs.exam.app.container.ContainerComponent;
 import com.sbs.exam.app.dto.Like;
 import com.sbs.exam.util.Util;
 
-public class LikeRepository {
+public class LikeRepository implements ContainerComponent {
 	private List<Like> likes;
 	private int lastId;
 

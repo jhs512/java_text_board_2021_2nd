@@ -6,10 +6,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.sbs.exam.app.container.ContainerComponent;
 import com.sbs.exam.app.dto.Article;
 import com.sbs.exam.util.Util;
 
-public class ArticleRepository {
+public class ArticleRepository implements ContainerComponent {
 	private List<Article> articles;
 	private int lastId;
 

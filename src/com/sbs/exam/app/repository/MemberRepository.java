@@ -3,10 +3,11 @@ package com.sbs.exam.app.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sbs.exam.app.container.ContainerComponent;
 import com.sbs.exam.app.dto.Member;
 import com.sbs.exam.util.Util;
 
-public class MemberRepository {
+public class MemberRepository implements ContainerComponent {
 
 	private List<Member> members;
 	private int lastId;

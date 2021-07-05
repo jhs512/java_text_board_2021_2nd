@@ -4,9 +4,10 @@ import java.util.Map;
 
 import com.sbs.exam.app.Rq;
 import com.sbs.exam.app.container.Container;
+import com.sbs.exam.app.container.ContainerComponent;
 import com.sbs.exam.app.service.LikeService;
 
-public class UsrLikeController extends Controller {
+public class UsrLikeController extends Controller implements ContainerComponent {
 
 	private LikeService likeService;
 
