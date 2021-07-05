@@ -20,12 +20,13 @@ public class ArticleService implements ContainerComponent {
 		likeService = Container.getLikeService();
 	}
 
-	private int writeForTestData(int boardId, int memberId, String title, String body, int hitCount) {
-		return articleRepository.write(boardId, memberId, title, body, hitCount);
+	private int write(int boardId, int memberId, String title, String body, int hitCount) {
+		String keywordsStr = Util.getKeywordsStrFromStr(body);
+		return articleRepository.write(boardId, memberId, title, body, keywordsStr, hitCount);
 	}
 
 	public int write(int boardId, int memberId, String title, String body) {
-		return articleRepository.write(boardId, memberId, title, body, 0);
+		return write(boardId, memberId, title, body, 0);
 	}
 
 	public Article getArticleById(int id) {
@@ -45,10 +46,10 @@ public class ArticleService implements ContainerComponent {
 	}
 
 	public void makeTestData() {
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 3; i++) {
 			String title = "제목 " + (i + 1);
 			String body = "내용 " + (i + 1);
-			int id = writeForTestData(i % 2 + 1, i % 2 + 1, title, body, Util.getRandomInt(1, 100));
+			int id = write(i % 2 + 1, i % 2 + 1, title, body, Util.getRandomInt(1, 100));
 			Article article = getArticleById(id);
 
 			makeArticleEtcTestData(article);
@@ -91,5 +92,12 @@ public class ArticleService implements ContainerComponent {
 
 	public void decreaseDislikePoint(int id) {
 		articleRepository.decreaseDislikePoint(id);
+	}
+
+	public void modify(int id, String title, String body) {
+
+		String keywordsStr = Util.getKeywordsStrFromStr(body);
+
+		articleRepository.modify(id, title, body, keywordsStr);
 	}
 }

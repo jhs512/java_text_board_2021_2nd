@@ -5,6 +5,14 @@
 	<groupId>com.sbs.exam</groupId>
 	<artifactId>TextBoard2021</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
@@ -12,6 +20,12 @@
 			<artifactId>lombok</artifactId>
 			<version>1.18.20</version>
 			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.shin285</groupId>
+			<artifactId>komoran</artifactId>
+			<version>3.4.0-beta</version>
 		</dependency>
 
 	</dependencies>

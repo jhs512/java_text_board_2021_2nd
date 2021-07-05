@@ -65,10 +65,12 @@ public class UsrArticleController extends Controller implements ContainerCompone
 		}
 
 		System.out.printf("새 제목 : ");
-		article.setTitle(sc.nextLine().trim());
+		String title = sc.nextLine().trim();
 		System.out.printf("새 내용 : ");
-		article.setBody(sc.nextLine().trim());
+		String body = sc.nextLine().trim();
 		article.setUpdateDate(Util.getNowDateStr());
+
+		articleService.modify(article.getId(), title, body);
 
 		System.out.printf("%d번 게시물을 수정하였습니다.\n", id);
 	}
@@ -117,6 +119,7 @@ public class UsrArticleController extends Controller implements ContainerCompone
 		System.out.printf("좋아요 : %d\n", article.getGoodlikePoint());
 		System.out.printf("싫어요 : %d\n", article.getDislikePoint());
 		System.out.printf("제목 : %s\n", article.getTitle());
+		System.out.printf("키워드 : %s\n", article.getKeywordsStr());
 		System.out.printf("내용 : %s\n", article.getBody());
 	}
 

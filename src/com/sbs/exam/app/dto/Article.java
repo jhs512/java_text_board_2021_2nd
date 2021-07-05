@@ -15,6 +15,7 @@ public class Article {
 	private int memberId;
 	private String title;
 	private String body;
+	private String keywordsStr;
 	private int hitCount;
 	private int goodlikePoint;
 	private int dislikePoint;

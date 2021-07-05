@@ -19,12 +19,12 @@ public class ArticleRepository implements ContainerComponent {
 		lastId = 0;
 	}
 
-	public int write(int boardId, int memberId, String title, String body, int hitCount) {
+	public int write(int boardId, int memberId, String title, String body, String keywordsStr, int hitCount) {
 		int id = lastId + 1;
 		String regDate = Util.getNowDateStr();
 		String updateDate = regDate;
-
-		Article article = new Article(id, regDate, updateDate, boardId, memberId, title, body, hitCount, 0, 0);
+		Article article = new Article(id, regDate, updateDate, boardId, memberId, title, body, keywordsStr, hitCount, 0,
+				0);
 		articles.add(article);
 
 		lastId = id;
@@ -184,4 +184,12 @@ public class ArticleRepository implements ContainerComponent {
 		article.setDislikePoint(article.getDislikePoint() - 1);
 	}
 
+	public void modify(int id, String title, String body, String keywordsStr) {
+		Article article = getArticleById(id);
+
+		article.setTitle(title);
+		article.setBody(body);
+		article.setKeywordsStr(keywordsStr);
+		article.setUpdateDate(Util.getNowDateStr());
+	}
 }
