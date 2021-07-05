@@ -128,6 +128,18 @@ public class ArticleRepository implements ContainerComponent {
 		} else if (orderByColumn.equals("hitCount") && orderAscTypeCode.equals("desc")) {
 			return sortedArticles.stream().sorted(Comparator.comparing(Article::getHitCount).reversed())
 					.collect(Collectors.toList());
+		} else if (orderByColumn.equals("goodlikePoint") && orderAscTypeCode.equals("asc")) {
+			return sortedArticles.stream().sorted(Comparator.comparing(Article::getGoodlikePoint))
+					.collect(Collectors.toList());
+		} else if (orderByColumn.equals("goodlikePoint") && orderAscTypeCode.equals("desc")) {
+			return sortedArticles.stream().sorted(Comparator.comparing(Article::getGoodlikePoint).reversed())
+					.collect(Collectors.toList());
+		} else if (orderByColumn.equals("dislikePoint") && orderAscTypeCode.equals("asc")) {
+			return sortedArticles.stream().sorted(Comparator.comparing(Article::getDislikePoint))
+					.collect(Collectors.toList());
+		} else if (orderByColumn.equals("dislikePoint") && orderAscTypeCode.equals("desc")) {
+			return sortedArticles.stream().sorted(Comparator.comparing(Article::getDislikePoint).reversed())
+					.collect(Collectors.toList());
 		}
 
 		return sortedArticles;
