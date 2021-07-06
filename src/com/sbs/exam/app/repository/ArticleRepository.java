@@ -72,6 +72,11 @@ public class ArticleRepository implements ContainerComponent {
 					return false;
 				}
 				break;
+			case "keyword":
+				if (!article.getKeywordsStr().contains(searchKeyword) && !article.getBody().contains(searchKeyword)) {
+					return false;
+				}
+				break;
 			case "title":
 			default:
 				if (!article.getTitle().contains(searchKeyword)) {
