@@ -192,4 +192,10 @@ public class ArticleRepository implements ContainerComponent {
 		article.setKeywordsStr(keywordsStr);
 		article.setUpdateDate(Util.getNowDateStr());
 	}
+
+	public void updateKeywordsStr(int id, String keywordsStr) {
+		Article article = getArticleById(id);
+		
+		article.setKeywordsStr(keywordsStr);
+	}
 }

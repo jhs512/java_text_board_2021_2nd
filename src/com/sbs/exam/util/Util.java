@@ -90,6 +90,11 @@ public class Util {
 			case "어제":
 			case "동시":
 			case "이":
+			case "가":
+			case "은":
+			case "는":
+			case "을":
+			case "를":
 				continue;
 			}
 

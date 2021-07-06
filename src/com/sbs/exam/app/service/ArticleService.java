@@ -1,6 +1,8 @@
 package com.sbs.exam.app.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.sbs.exam.app.container.Container;
 import com.sbs.exam.app.container.ContainerComponent;
@@ -21,8 +23,19 @@ public class ArticleService implements ContainerComponent {
 	}
 
 	private int write(int boardId, int memberId, String title, String body, int hitCount) {
-		String keywordsStr = Util.getKeywordsStrFromStr(body);
-		return articleRepository.write(boardId, memberId, title, body, keywordsStr, hitCount);
+		int id = articleRepository.write(boardId, memberId, title, body, "", hitCount);
+
+		updateKeywordsStrAsync(id);
+
+		return id;
+	}
+
+	private void updateKeywordsStrAsync(int id) {
+		new Thread(() -> {
+			Article article = getArticleById(id);
+			String keywordsStr = Util.getKeywordsStrFromStr(article.getBody());
+			articleRepository.updateKeywordsStr(id, keywordsStr);
+		}).start();
 	}
 
 	public int write(int boardId, int memberId, String title, String body) {
@@ -46,13 +59,20 @@ public class ArticleService implements ContainerComponent {
 	}
 
 	public void makeTestData() {
-		for (int i = 0; i < 3; i++) {
-			String title = "제목 " + (i + 1);
-			String body = "내용 " + (i + 1);
+		List<Map<String, Object>> testData = new ArrayList<>();
+
+		testData.add(Util.mapOf("title", "안녕하세요. 저는 홍길동 입니다.", "body", "저는 애플제품을 좋아합니다. 오랜 아이폰 유저인 저는 ..."));
+		testData.add(Util.mapOf("title", "안녕하세요. 저는 홍길순 입니다.", "body", "저는 웹 개발자 10년차 프리랜서 입니다. 저는 C++을 참 좋아합니다."));
+
+		int i = 0;
+		for (Map<String, Object> testDataRow : testData) {
+			String title = (String) testDataRow.get("title");
+			String body = (String) testDataRow.get("body");
 			int id = write(i % 2 + 1, i % 2 + 1, title, body, Util.getRandomInt(1, 100));
 			Article article = getArticleById(id);
 
 			makeArticleEtcTestData(article);
+			i++;
 		}
 	}
 
@@ -95,9 +115,8 @@ public class ArticleService implements ContainerComponent {
 	}
 
 	public void modify(int id, String title, String body) {
+		articleRepository.modify(id, title, body, "");
 
-		String keywordsStr = Util.getKeywordsStrFromStr(body);
-
-		articleRepository.modify(id, title, body, keywordsStr);
+		updateKeywordsStrAsync(id);
 	}
 }
